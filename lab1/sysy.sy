@@ -1,0 +1,69 @@
+// 全局变量
+int globalVar = 10;
+
+// 函数声明
+int add(int a, int b);
+float multiply(float x, float y);
+
+int main() {
+    // 局部变量
+    int localVar = 5;
+    
+    // 常量
+    const int constVar = 7;
+    
+    // 数组
+    int myArray[5];
+    myArray[0] = 1;
+    myArray[1] = 2;
+    
+    // 输入
+    int input;
+    getint(input);
+    
+    // 输出
+    putint(input);
+    
+    // 循环
+    int i = 0;
+    while (i < 5) {
+        // 条件语句
+        if (i == 2) {
+            break;
+        }
+        
+        // 数值运算
+        localVar = localVar + i;
+        
+        // 关系运算
+        if (localVar >= 8) {
+            localVar = localVar - 2;
+        }
+        
+        // 逻辑运算
+        if (input < 0 && localVar > 0) {
+            input = input * -1;
+        }
+        
+        i = i + 1;
+    }
+    
+    // 函数调用
+    int result = add(localVar, constVar);
+    float product = multiply(2.5, 3.0);
+    
+    // 隐式类型转换
+    int intResult = (int)product;
+    
+    // 返回语句
+    return intResult;
+}
+
+// 函数定义
+int add(int a, int b) {
+    return a + b;
+}
+
+float multiply(float x, float y) {
+    return x * y;
+}

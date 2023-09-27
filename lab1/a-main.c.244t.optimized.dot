@@ -1,0 +1,114 @@
+digraph "a-main.c.244t.optimized" {
+overlap=false;
+subgraph "cluster_main" {
+	style="dashed";
+	color="black";
+	label="main ()";
+	subgraph cluster_0_1 {
+	style="filled";
+	color="darkgreen";
+	fillcolor="grey88";
+	label="loop 1";
+	labeljust=l;
+	penwidth=2;
+	subgraph cluster_0_2 {
+	style="filled";
+	color="darkgreen";
+	fillcolor="grey77";
+	label="loop 2";
+	labeljust=l;
+	penwidth=2;
+	fn_0_basic_block_6 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 6\>:\l\
+|#\ a_6\ =\ PHI\ \<a_7(4),\ a_38(5)\>\l\
+|#\ b_8\ =\ PHI\ \<b_9(4),\ b_36(5)\>\l\
+|#\ i_10\ =\ PHI\ \<i_11(4),\ i_39(5)\>\l\
+|n.0_1\ =\ n;\l\
+|if\ (i_10\ \<\ n.0_1)\l\
+\ \ goto\ \<bb\ 5\>;\ [INV]\l\
+else\l\
+\ \ goto\ \<bb\ 7\>;\ [INV]\l\
+}"];
+
+	fn_0_basic_block_5 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 5\>:\l\
+|t_35\ =\ b_8;\l\
+|b_36\ =\ a_6\ +\ b_8;\l\
+|printf\ (\"%d\\n\",\ b_36);\l\
+|a_38\ =\ t_35;\l\
+|i_39\ =\ i_10\ +\ 1;\l\
+}"];
+
+	}
+	fn_0_basic_block_8 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 8\>:\l\
+|#\ total_cpu_time_used_5\ =\ PHI\ \<total_cpu_time_used_15(2),\ total_cpu_time_used_30(7)\>\l\
+|#\ a_7\ =\ PHI\ \<a_16(2),\ a_31(7)\>\l\
+|#\ b_9\ =\ PHI\ \<b_17(2),\ b_32(7)\>\l\
+|#\ i_11\ =\ PHI\ \<i_18(2),\ i_33(7)\>\l\
+|#\ iter_12\ =\ PHI\ \<iter_21(2),\ iter_34(7)\>\l\
+|if\ (iter_12\ \<=\ 9999)\l\
+\ \ goto\ \<bb\ 3\>;\ [INV]\l\
+else\l\
+\ \ goto\ \<bb\ 9\>;\ [INV]\l\
+}"];
+
+	fn_0_basic_block_3 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 3\>:\l\
+|start_time_26\ =\ clock\ ();\l\
+}"];
+
+	fn_0_basic_block_4 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 4\>:\l\
+goto\ \<bb\ 6\>;\ [INV]\l\
+}"];
+
+	fn_0_basic_block_7 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 7\>:\l\
+|end_time_28\ =\ clock\ ();\l\
+|_2\ =\ end_time_28\ -\ start_time_26;\l\
+|_3\ =\ (double)\ _2;\l\
+|cpu_time_used_29\ =\ _3\ /\ 1.0e+6;\l\
+|total_cpu_time_used_30\ =\ total_cpu_time_used_5\ +\ cpu_time_used_29;\l\
+|a_31\ =\ 0;\l\
+|b_32\ =\ 1;\l\
+|i_33\ =\ 1;\l\
+|iter_34\ =\ iter_12\ +\ 1;\l\
+}"];
+
+	}
+	fn_0_basic_block_0 [shape=Mdiamond,style=filled,fillcolor=white,label="ENTRY"];
+
+	fn_0_basic_block_1 [shape=Mdiamond,style=filled,fillcolor=white,label="EXIT"];
+
+	fn_0_basic_block_2 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 2\>:\l\
+|total_cpu_time_used_15\ =\ 0.0;\l\
+|a_16\ =\ 0;\l\
+|b_17\ =\ 1;\l\
+|i_18\ =\ 1;\l\
+|scanf\ (\"%d\",\ &n);\l\
+|iter_21\ =\ 0;\l\
+goto\ \<bb\ 8\>;\ [INV]\l\
+}"];
+
+	fn_0_basic_block_9 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 9\>:\l\
+|_4\ =\ total_cpu_time_used_5\ /\ 1.0e+4;\l\
+|printf\ (\"Average\ execution\ time\ over\ %d\ iterations:\ %lf\ seconds\\n\",\ 10000,\ _4);\l\
+|_23\ =\ 0;\l\
+|n\ =\{v\}\ \{CLOBBER\};\l\
+}"];
+
+	fn_0_basic_block_10 [shape=record,style=filled,fillcolor=lightgrey,label="{\<bb\ 10\>:\l\
+|\<L11\>:\l\
+|return\ _23;\l\
+}"];
+
+	fn_0_basic_block_0:s -> fn_0_basic_block_2:n [style="solid,bold",color=blue,weight=100,constraint=true];
+	fn_0_basic_block_2:s -> fn_0_basic_block_8:n [style="solid,bold",color=blue,weight=100,constraint=true];
+	fn_0_basic_block_3:s -> fn_0_basic_block_4:n [style="solid,bold",color=blue,weight=100,constraint=true];
+	fn_0_basic_block_4:s -> fn_0_basic_block_6:n [style="solid,bold",color=blue,weight=100,constraint=true];
+	fn_0_basic_block_5:s -> fn_0_basic_block_6:n [style="dotted,bold",color=blue,weight=10,constraint=false];
+	fn_0_basic_block_6:s -> fn_0_basic_block_5:n [style="solid,bold",color=black,weight=10,constraint=true];
+	fn_0_basic_block_6:s -> fn_0_basic_block_7:n [style="solid,bold",color=black,weight=10,constraint=true];
+	fn_0_basic_block_7:s -> fn_0_basic_block_8:n [style="dotted,bold",color=blue,weight=10,constraint=false];
+	fn_0_basic_block_8:s -> fn_0_basic_block_3:n [style="solid,bold",color=black,weight=10,constraint=true];
+	fn_0_basic_block_8:s -> fn_0_basic_block_9:n [style="solid,bold",color=black,weight=10,constraint=true];
+	fn_0_basic_block_9:s -> fn_0_basic_block_10:n [style="solid,bold",color=blue,weight=100,constraint=true];
+	fn_0_basic_block_10:s -> fn_0_basic_block_1:n [style="solid,bold",color=black,weight=10,constraint=true];
+	fn_0_basic_block_0:s -> fn_0_basic_block_1:n [style="invis",constraint=true];
+}
+}

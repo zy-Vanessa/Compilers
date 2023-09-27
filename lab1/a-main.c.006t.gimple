@@ -1,0 +1,79 @@
+int main ()
+{
+  int D.2494;
+
+  {
+    double total_cpu_time_used;
+    int a;
+    int b;
+    int i;
+    int t;
+    int n;
+    clock_t start_time;
+    clock_t end_time;
+
+    try
+      {
+        total_cpu_time_used = 0.0;
+        a = 0;
+        b = 1;
+        i = 1;
+        scanf ("%d", &n);
+        {
+          int iter;
+
+          iter = 0;
+          goto <D.2488>;
+          <D.2487>:
+          {
+            double cpu_time_used;
+
+            start_time = clock ();
+            if (0 != 0) goto <D.2490>; else goto <D.2491>;
+            <D.2490>:
+            printf ("This code will never execute!");
+            <D.2491>:
+            if (0 != 0) goto <D.2492>; else goto <D.2493>;
+            <D.2492>:
+            printf ("error!");
+            <D.2493>:
+            goto <D.2485>;
+            <D.2486>:
+            t = b;
+            b = a + b;
+            printf ("%d\n", b);
+            a = t;
+            i = i + 1;
+            <D.2485>:
+            n.0_1 = n;
+            if (i < n.0_1) goto <D.2486>; else goto <D.2484>;
+            <D.2484>:
+            end_time = clock ();
+            _2 = end_time - start_time;
+            _3 = (double) _2;
+            cpu_time_used = _3 / 1.0e+6;
+            total_cpu_time_used = total_cpu_time_used + cpu_time_used;
+            a = 0;
+            b = 1;
+            i = 1;
+          }
+          iter = iter + 1;
+          <D.2488>:
+          if (iter <= 9999) goto <D.2487>; else goto <D.2482>;
+          <D.2482>:
+        }
+        _4 = total_cpu_time_used / 1.0e+4;
+        printf ("Average execution time over %d iterations: %lf seconds\n", 10000, _4);
+        D.2494 = 0;
+        return D.2494;
+      }
+    finally
+      {
+        n = {CLOBBER};
+      }
+  }
+  D.2494 = 0;
+  return D.2494;
+}
+
+
