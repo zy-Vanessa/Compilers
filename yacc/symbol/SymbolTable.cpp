@@ -15,10 +15,10 @@ void SymbolTable::insert(std::string identifier, double value)
 {
     auto res = symbolTable.insert(std::pair<std::string, double>(identifier, value));
     if(res.second){ //检查插入是否成功
-        std::cout << "Insert " << identifier << "=" << value <<" success!" << std::endl;
+        std::cout << "Insert " << identifier << " = " << value << std::endl;
     }
-    else{ //更新id对应的值
-        std::cout << "Update " << identifier << ":" << symbolTable[identifier] << "->" << value << " success!" << std::endl;
+    else{ //更新标识符对应的值
+        std::cout << "Update " << identifier << ":" << symbolTable[identifier] << "->" << value << std::endl;
         symbolTable[identifier] = value;
     }
     printAll();
@@ -34,7 +34,10 @@ double SymbolTable::getValue(std::string identifier)
 
 void SymbolTable::printAll()
 {
+    std::cout << "print_table_begin" << std::endl;
     for (auto &item : symbolTable){
         std::cout << item.first << " = " << item.second << std::endl;
     }
+    std::cout << "print_table_end" << std::endl;
+    std::cout << std::endl;
 }
