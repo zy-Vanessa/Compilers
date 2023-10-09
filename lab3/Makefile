@@ -1,12 +1,12 @@
-.PHONY: basic, advanced, operator
+.PHONY: basic, operator, symbol
 basic:
-	yacc basic.y
-	gcc y.tab.c -o basic
+	yacc basic.y -o basic.tab.c
+	gcc basic.tab.c -o basic
 
-advanced:
-	yacc advanced.y
-	gcc y.tab.c -o advanced
-	
 operator:
-	yacc operator.y
-	gcc y.tab.c -o operator
+	yacc operator.y -o operator.tab.c
+	gcc operator.tab.c -o operator
+	
+symbol:
+	yacc symbol.y -o symbol.tab.c
+	g++ symbol.tab.c SymbolTable.cpp -o symbol
