@@ -67,11 +67,10 @@
 
 
 /* First part of user prologue.  */
-#line 1 "basic.y"
+#line 1 "advance.y"
 
 /**************************************************
-将所有的词法分析功能均放在 yylex 函数内实现，为 +、-、*、\、(、 ) 每个运算符及整数分别定义一个单词类别，在 yylex 内实现代码，能
-识别这些单词，并将单词类别返回给词法分析程序。
+实现功能更强的词法分析程序，可识别并忽略空格、制表符、回车等空白符，能识别多位十进制整数。
 **************************************************/
 // 定义段：用于添加所需头文件、函数定义、全局变量等
 // 直接复制到语法分析程序中
@@ -90,7 +89,7 @@ extern int yyparse();
 FILE* yyin;
 void yyerror(const char* s);
 
-#line 94 "basic.tab.c"
+#line 93 "advance.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -577,8 +576,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    43,    43,    44,    45,    48,    49,    50,    51,    52,
-      53,    54
+       0,    41,    41,    42,    43,    46,    47,    48,    49,    50,
+      51,    52
 };
 #endif
 
@@ -1147,55 +1146,55 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* lines: lines expr ';'  */
-#line 43 "basic.y"
+#line 41 "advance.y"
                           { printf("%f\n", yyvsp[-1]); }
-#line 1153 "basic.tab.c"
+#line 1152 "advance.tab.c"
     break;
 
   case 5: /* expr: expr ADD expr  */
-#line 48 "basic.y"
+#line 46 "advance.y"
                           { yyval = yyvsp[-2] + yyvsp[0]; }
-#line 1159 "basic.tab.c"
+#line 1158 "advance.tab.c"
     break;
 
   case 6: /* expr: expr SUB expr  */
-#line 49 "basic.y"
+#line 47 "advance.y"
                           { yyval = yyvsp[-2] - yyvsp[0]; }
-#line 1165 "basic.tab.c"
+#line 1164 "advance.tab.c"
     break;
 
   case 7: /* expr: expr MUL expr  */
-#line 50 "basic.y"
+#line 48 "advance.y"
                           { yyval = yyvsp[-2] * yyvsp[0]; }
-#line 1171 "basic.tab.c"
+#line 1170 "advance.tab.c"
     break;
 
   case 8: /* expr: expr DIV expr  */
-#line 51 "basic.y"
+#line 49 "advance.y"
                           { yyval = yyvsp[-2] / yyvsp[0]; }
-#line 1177 "basic.tab.c"
+#line 1176 "advance.tab.c"
     break;
 
   case 9: /* expr: LEFT_PAR expr RIGHT_PAR  */
-#line 52 "basic.y"
+#line 50 "advance.y"
                                      { yyval = yyvsp[-1]; }
-#line 1183 "basic.tab.c"
+#line 1182 "advance.tab.c"
     break;
 
   case 10: /* expr: '-' expr  */
-#line 53 "basic.y"
+#line 51 "advance.y"
                                  { yyval =-yyvsp[0]; }
-#line 1189 "basic.tab.c"
+#line 1188 "advance.tab.c"
     break;
 
   case 11: /* expr: NUMBER  */
-#line 54 "basic.y"
+#line 52 "advance.y"
                   { yyval = yyvsp[0]; }
-#line 1195 "basic.tab.c"
+#line 1194 "advance.tab.c"
     break;
 
 
-#line 1199 "basic.tab.c"
+#line 1198 "advance.tab.c"
 
       default: break;
     }
@@ -1388,7 +1387,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 56 "basic.y"
+#line 54 "advance.y"
 
 
 // programs section
@@ -1396,14 +1395,22 @@ yyreturnlab:
 // yylex函数：实现词法分析功能
 int yylex()
 {
+    // place you tiken retrieving code here
     int t;
     while (1) {
         t = getchar();
-        if (t==' ' ||t=='\n'){
+        if (t==' ' || t=='\t' || t=='\n'){
             // do nothing
         }
         else if (isdigit(t)) {
-            yylval = t - '0';
+            yylval = 0;
+            while (isdigit(t)) {
+                yylval = yylval * 10 + t - '0';
+                t = getchar();
+            }
+            // ungetc函数将读出的多余字符再次放回到缓冲区去，下一次读数字符进行下一个单词识别时会再次读出来。
+            // 此时非数字字符已经读出，因此需要再次放回缓冲区
+            ungetc(t, stdin);
             return NUMBER;
         }
         else if(t=='+') {

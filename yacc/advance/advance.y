@@ -1,7 +1,6 @@
 %{
 /**************************************************
-将所有的词法分析功能均放在 yylex 函数内实现，为 +、-、*、\、(、 ) 每个运算符及整数分别定义一个单词类别，在 yylex 内实现代码，能
-识别这些单词，并将单词类别返回给词法分析程序。
+实现功能更强的词法分析程序，可识别并忽略空格、制表符、回车等空白符，能识别多位十进制整数。
 **************************************************/
 // 定义段：用于添加所需头文件、函数定义、全局变量等
 // 直接复制到语法分析程序中
@@ -22,7 +21,7 @@ void yyerror(const char* s);
 %}
 
 
-//给每个符号定义一个单词类别
+// 声明运算符的结合性和优先级，优先级由低到高的顺序声明
 %token NUMBER
 %token ADD
 %token SUB
@@ -31,7 +30,6 @@ void yyerror(const char* s);
 %token LEFT_PAR
 %token RIGHT_PAR
 
-//声明运算符的结合性和优先级，优先级由低到高的顺序声明
 %left ADD SUB
 %left MUL DIV
 %right UMINUS // 取负
@@ -60,14 +58,22 @@ expr  :    expr ADD expr  { $$ = $1 + $3; } // $$代表产生式左部的属性�
 // yylex函数：实现词法分析功能
 int yylex()
 {
+    // place you tiken retrieving code here
     int t;
     while (1) {
         t = getchar();
-        if (t==' ' ||t=='\n'){
+        if (t==' ' || t=='\t' || t=='\n'){
             // do nothing
         }
         else if (isdigit(t)) {
-            yylval = t - '0';
+            yylval = 0;
+            while (isdigit(t)) {
+                yylval = yylval * 10 + t - '0';
+                t = getchar();
+            }
+            // ungetc函数将读出的多余字符再次放回到缓冲区去，下一次读数字符进行下一个单词识别时会再次读出来。
+            // 此时非数字字符已经读出，因此需要再次放回缓冲区
+            ungetc(t, stdin);
             return NUMBER;
         }
         else if(t=='+') {
